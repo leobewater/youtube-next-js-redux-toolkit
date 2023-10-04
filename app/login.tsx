@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login, logout } from '@/redux/features/auth-slice';
+import { login, logout, toggleModerator } from '@/redux/features/auth-slice';
 import { AppDispatch } from '@/redux/store';
 
 const Login = () => {
@@ -15,7 +15,9 @@ const Login = () => {
   const onClickLogout = () => {
     dispatch(logout());
   };
-  const onClickToggle = () => {};
+  const onClickToggle = () => {
+    dispatch(toggleModerator());
+  };
 
   return (
     <div>
@@ -25,7 +27,7 @@ const Login = () => {
       <br />
       <button onClick={onClickLogout}>Logout</button>
       <br />
-      <button>Toggle Moderator Status</button>
+      <button onClick={onClickToggle}>Toggle Moderator Status</button>
     </div>
   );
 };
