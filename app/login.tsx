@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login, logout, toggleModerator } from '@/redux/features/auth-slice';
-import { AppDispatch } from '@/redux/store';
+import { AppDispatch, useAppSelector } from '@/redux/store';
 
 const Login = () => {
   const [username, setUsername] = useState('');
 
   const dispatch = useDispatch<AppDispatch>();
+  const isAuth = useAppSelector((state) => state.authReducer.value.isAuth);
 
   const onClickLogin = () => {
     dispatch(login(username));
@@ -27,7 +28,9 @@ const Login = () => {
       <br />
       <button onClick={onClickLogout}>Logout</button>
       <br />
-      <button onClick={onClickToggle}>Toggle Moderator Status</button>
+      {isAuth && (
+        <button onClick={onClickToggle}>Toggle Moderator Status</button>
+      )}
     </div>
   );
 };
